@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+
 # Create your models here.
 class Mascotas(models.Model):
     nombres = models.CharField(max_length = 100)
@@ -11,6 +12,7 @@ class Mascotas(models.Model):
 
     def get_absolute_url(self):
         return reverse('Adopciones:detalles',kwargs={'myID' : self.id})
+
 class Usuario(models.Model):
     nombre     = models.CharField(max_length = 100)
     apellido   = models.CharField(max_length = 100)
@@ -18,7 +20,22 @@ class Usuario(models.Model):
     correo     = models.EmailField(max_length=70,blank=True)
     edad       = models.IntegerField()
     telefono   = models.IntegerField()
+    
+    def get_absolute_url(self):
+        return reverse('Adopciones:detallesUsuario', kwargs={'myID':self.id})
 
 class Direcciones():
     def get_adoptar_url(self):
         return "mascotas"
+    def get_usuario_url(self):
+        return "user"
+    def usuarioLista(self):
+        return "../usuarios/"
+    def usuarioCrear(self):
+        return "../crearUsuario/"
+    def index(self):
+        return "../"
+    def user(self):
+        return "../user/"
+    
+        
